@@ -3,7 +3,7 @@ v3.0.0
 @author Polowis
 
 this code works better than the other two, but still results in run time error: maximum recursion depth exceeded because we're using 
-tail recrusion in the code because python prevents inifinte recursions to avoid stack overflow. 
+tail recrusion in the code due to the fact that python prevents inifinte recursions to avoid stack overflow. ( which is good)
 V3.0.0 improves the caculation for the ball direction by adding some maths. 
 
 There are a few ways to fix this problem:
