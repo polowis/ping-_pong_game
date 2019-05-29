@@ -11,7 +11,9 @@ use setrecursionlimit() to increase the value of recursion limit but this is dan
 it will change the memory allocation space for stack which is responsible for storing values of programming counter during recursion process
 or we can do it manually to bounce the ball which is not recommended.
 
+
 Because the ball need to bounce infinitely, I cannot figure out any other ways to perform this without using recursion. 
+I will try to find errors in my algorithm and see if I can stop the program before it reaches its limit
 P/S This piece of code work perfecly in processing programming language. However, some adjustments have been made so it
 can work with microbit. 
 '''
