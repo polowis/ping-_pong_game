@@ -12,7 +12,7 @@ it will change the memory allocation space for stack which is responsible for st
 or we can do it manually to bounce the ball which is not recommended.
 
 Because the ball need to bounce infinitely, I cannot figure out any other ways to perform this without using recursion. 
-P/S This piece of code work perfecly in processing programming language. Although some adjustments have been made so it
+P/S This piece of code work perfecly in processing programming language. However, some adjustments have been made so it
 can work with microbit. 
 '''
 
