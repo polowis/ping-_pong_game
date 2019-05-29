@@ -3,7 +3,14 @@ v3.0.0
 @author Polowis
 
 this code works better than the other two, but still results in run time error: maximum recursion depth exceeded because we're using 
-tail recrusion in the code. V3.0.0 improves the caculation for the ball direction by adding some maths. 
+tail recrusion in the code because python prevents inifinte recursions to avoid stack overflow. 
+V3.0.0 improves the caculation for the ball direction by adding some maths. 
+
+There are a few ways to fix this problem:
+use setrecursionlimit() to increase the value of recursion limit but this is dangerous because
+it will change the memory allocation space for stack which is responsible for storing values of programming counter during recursion process
+or we can do it manually to bounce the ball which is not recommended.
+
 Because the ball need to bounce infinitely, I cannot figure out any other ways to perform this without using recursion. 
 P/S This piece of code work perfecly in processing programming language. Although some adjustments have been made so it
 can work with microbit. 
