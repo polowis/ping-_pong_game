@@ -4,3 +4,9 @@ class Ball:
         self.y = y
     def startTheGame(self):
         display.set_pixel(self.x, self.y, 9)
+        display.set_pixel(self.x, self.y, 9)
+        
+    '''
+    Use recursive algorithm to move the position of the ball
+    '''
+        
