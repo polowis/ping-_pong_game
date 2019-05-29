@@ -9,7 +9,7 @@ class Ball:
     '''
     Use recursive algorithm to move the position of the ball
     This will likely result in stack overflow, since the ball will need to move infinitely until one player lose. 
-    This piece of code uses tail recursion
+    This piece of code uses tail recursion, it will run until it reaches the maximum recursion loops
     '''
     def update(self, x=2, y=2, z=0):
         z += 1
