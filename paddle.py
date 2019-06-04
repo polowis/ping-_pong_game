@@ -4,7 +4,7 @@ class Paddle():
         self.y1 = y1
         self.x2 = x2
         self.y2 = y2
-        
+
     #private method
     def __setPaddleRight(self):
         self.x1 = 4
@@ -13,9 +13,9 @@ class Paddle():
         self.y2 = 1
         display.set_pixel(self.x1, self.y1, 9)
         display.set_pixel(self.x2, self.y2, 9)
-     
+
      #private method
-    
+
     def __setPaddleLeft(self):
         self.x1 = 0
         self.x2 = 0
@@ -25,8 +25,8 @@ class Paddle():
         display.set_pixel(self.x2, self.y2, 9)
 
     def startGame(self):
-        self.setPaddleLeft()
-        self.setPaddleRight()
+        self.__setPaddleLeft()
+        self.__setPaddleRight()
 
     def moveUp(self):
         self.y1 -= 1
