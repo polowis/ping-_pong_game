@@ -1,9 +1,22 @@
 
+"""
+4.0.0
+This is the final version of the ball movement, this WILL work. I will explain how to make this code work in the class
+If you're reading this, I just want to tell you, we finish the assignment :)) (need to add scoring system and some other functions
+but thats ok). I have TESTED the code. but some minor bugs may occur.
 
+The code for paddle movement will be on the other file. 
+HAPPY CODING :> 
+
+
+
+"""
 
 
 from microbit import *
+from paddle import *
 import random
+import paddle
   
 class Ball:
     def __init__(self, x = 2, y = 2, xspeed = (random.choice([-1, 1])), yspeed = (random.choice([-1, 1]))):
@@ -14,13 +27,20 @@ class Ball:
         
         self.rightPaddle = 1
         self.leftPaddle = 1
+        
+    def __getPaddle(self):
+        paddle = Paddle(self.rightPaddle, self.leftPaddle)
+        paddle.setPaddle()
+        
     def __getBallLocation(self):
       return self.x, self.y
+    
     def startGame(self):
        display.set_pixel(self.x, self.y, 9)
        sleep(500)
        display.set_pixel(self.x, self.y, 0)
        sleep(500)
+      
     def edges(self):
       global edge
       edge = self.__update()
@@ -28,11 +48,22 @@ class Ball:
         display.show(Image.HAPPY)
       elif edge == 2:
         display.show(Image.SAD)
-    def show(self):
-        display.clear()
         
+    def show(self):
+        paddle = Paddle(self.rightPaddle, self.leftPaddle)
+        display.clear()
+        paddle.start()
         display.set_pixel(self.x, self.y, 9)
+        sleep(1000)
         return
+      
+    def AI(self):
+        if(random.randint(1, 6)) != 1:
+            if self.x < self.leftPaddle-1:
+                self.leftPaddle = self.leftPaddle - 1
+            elif self.x > self.leftPaddle:
+                self.leftPaddle = self.leftPaddle + 1
+                
     def __update(self):
         if self.y == 2:
             self.x = self.x + self.yspeed
