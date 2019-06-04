@@ -2,7 +2,7 @@
 """
 4.0.0
 This is the final version of the ball movement, this WILL work. I will explain how to make this code work in the class
-If you're reading this, I just want to tell you, we finish the assignment :)) (need to add scoring system and some other functions
+If you're reading this, I just want to tell you, we nearly finish the assignment :)) (need to add scoring system and some other functions
 but thats ok). I have TESTED the code. but some minor bugs may occur.
 
 The code for paddle movement will be on the other file. 
