@@ -1,7 +1,7 @@
 class Paddle():
     def __init__(self, x1, x2 , y1, y2 ):
         self.x1 = x1
-        self.y1= y1
+        self.y1 = y1
         self.x2 = x2
         self.y2 = y2
 
@@ -29,15 +29,14 @@ class Paddle():
         self.y1 -= 1
         self.y2 -= 1
         if self.y1 or self.y2 == 0:
-            self.y1 = self.y1
-            self.y2 = self.y2
+            return self.y1, self.y2
 
     def moveDown(self):
         self.y += 1
         self.y += 1
         if self.y1 or self.y2 == 0:
-            self.y1 = self.y1
-            self.y2 = self.y2
+            return self.y1, self.y2
+            
 
 
     def getCurrentPosition(self):
