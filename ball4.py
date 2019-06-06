@@ -9,7 +9,7 @@ The code for paddle movement will be on the other file.
 HAPPY CODING :> 
 
 4.1.0
-OOP version and non OOP version. Please use OOP version instead
+OOP version and non OOP version. Please use OOP version instead. Both versions have the same result, just different style of writing
 I have decided to combine movement paddle. Please use the class Ball code when submitting the assignment. 
 
 
