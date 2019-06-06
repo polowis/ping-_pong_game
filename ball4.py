@@ -9,13 +9,14 @@ The code for paddle movement will be on the other file.
 HAPPY CODING :> 
 
 4.1.0
-I have decided to combine movement paddle.
+I have decided to combine movement paddle. Please use the class code when submitting the assignment. 
 
 """
 
 from microbit import *
 import music
 import random
+
 
 class Ball:
     def __init__(self, x = 2, y = 2, xspeed = (random.choice([-1, 1])), yspeed = (random.choice([-1, 1]))):
@@ -54,7 +55,7 @@ class Ball:
         self.__setPaddleBottom()
         display.set_pixel(self.x, self.y, 9)
         sleep(1000)
-        return
+        
 
     def AI(self):
         if (random.randint(1, 6)) != 1:
