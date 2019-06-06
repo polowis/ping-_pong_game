@@ -59,10 +59,11 @@ class Ball:
         return
 
     def AI(self):
-       if self.x < self.topPaddle - 1:
-           self.topPaddle -= 1
-       elif self.x > self.topPaddle:
-           self.topPaddle += 1
+        if (random.randint(1, 6)) != 1:
+            if self.x < self.topPaddle - 1:
+                self.topPaddle = self.topPaddle -1
+            elif self.x > self.topPaddle:
+                self.topPaddle = self.topPaddle + 1
               
     def render(self):
       display.set_pixel(self.x, self.y, 9)
