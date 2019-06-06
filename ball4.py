@@ -8,79 +8,86 @@ but thats ok). I have TESTED the code. but some minor bugs may occur.
 The code for paddle movement will be on the other file. 
 HAPPY CODING :> 
 
-
+4.1.0
+I have decided to combine movement paddle.
 
 """
 
 
 from microbit import *
-from paddle import *
+import music
 import random
-import paddle
-  
+
 class Ball:
     def __init__(self, x = 2, y = 2, xspeed = (random.choice([-1, 1])), yspeed = (random.choice([-1, 1]))):
         self.x = x
         self.y = y
         self.xspeed = xspeed
         self.yspeed = yspeed
-        
-        self.rightPaddle = 1
-        self.leftPaddle = 1
-        
-    def __getPaddle(self):
-        paddle = Paddle(self.rightPaddle, self.leftPaddle)
-        paddle.setPaddle()
-        
-    def __getBallLocation(self):
-      return self.x, self.y
-    
-    def startGame(self):
-       display.set_pixel(self.x, self.y, 9)
-       sleep(500)
-       display.set_pixel(self.x, self.y, 0)
-       sleep(500)
-      
-    def edges(self):
-      global edge
-      edge = self.__update()
-      if edge == 1:
-        display.show(Image.HAPPY)
-      elif edge == 2:
-        display.show(Image.SAD)
-        
+
+        self.bottomPaddle = 1
+        self.topPaddle = 1
+        self.yspeed = (random.choice([-1, 1]))
+        self.xspeed = (random.choice([-1, 1]))
+
+    def __setPaddleTop(self):
+        display.set_pixel(self.topPaddle, 0, 5)
+        display.set_pixel((self.topPaddle - 1), 0, 5)
+
+    def __setPaddleBottom(self):
+        display.set_pixel(self.bottomPaddle, 4, 5)
+        display.set_pixel(self.topPaddle - 1, 4, 5)
+
+    def __getCurrentBallPosition(self):
+        return self.x, self.y
+
+    def setPaddle(self):
+        self.bottomPaddle += button_b.get_presses()
+        self.bottomPaddle -= button_b.get_presses()
+        if self.bottomPaddle < 1:
+            self.bottomPaddle = 1
+        elif self.bottomPaddle > 4:
+            self.bottomPaddle = 4
+        return
+
     def show(self):
-        paddle = Paddle(self.rightPaddle, self.leftPaddle)
         display.clear()
-        paddle.start()
+        self.__setPaddleTop()
+        self.__setPaddleBottom()
         display.set_pixel(self.x, self.y, 9)
         sleep(1000)
         return
-      
+
     def AI(self):
-        if(random.randint(1, 6)) != 1:
-            if self.x < self.leftPaddle-1:
-                self.leftPaddle = self.leftPaddle - 1
-            elif self.x > self.leftPaddle:
-                self.leftPaddle = self.leftPaddle + 1
-                
-    def __update(self):
+       if self.x < self.topPaddle - 1:
+           self.topPaddle -= 1
+       elif self.x > self.topPaddle:
+           self.topPaddle += 1
+              
+    def render(self):
+      display.set_pixel(self.x, self.y, 9)
+      sleep(500)
+      display.set_pixel(self.x, self.y, 0)
+      sleep(500)
+    
+        
+    def update(self):
         if self.y == 2:
             self.x = self.x + self.yspeed
             self.y = self.y + self.yspeed
         elif self.y == 1 or self.y == 3:
             if self.y == 1:
-                if self.leftPaddle == self.x:
+                if self.topPaddle == self.x:
                     self.xspeed = -1
                     self.yspeed = -1
-                elif self.leftPaddle - 1 == self.x:
+                elif self.topPaddle - 1 == self.x:
                     self.xspeed = -1
                     self.yspeed = -1
             else:
-                if self.rightPaddle == self.x:
+                if self.bottomPaddle == self.x:
                     self.xspeed = 1
                     self.yspeed = -1
-                elif self.rightPaddle - 1 == self.x:
+                elif self.bottomPaddle - 1 == self.x:
                     self.xspeed = -1
                     self.yspeed = -1
             self.x += self.xspeed
@@ -96,3 +103,11 @@ class Ball:
             return 2
         else:
             return 0
+
+
+          
+          
+          
+          
+          
+
