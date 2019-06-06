@@ -107,7 +107,25 @@ class Ball:
 
           
           
-          
+ball = Ball()
+def function():
+     global edges
+     ball.setPaddle()
+     ball.AI()
+     edges = ball.update()
+
+
+ball.show()
+while True:
+     function()
+     ball.show()
+     if edges == 1:
+         display.show(Image.HAPPY)
+     elif edges == 2:
+         display.show(Image.SAD)
+
+while True:
+     ball.render()
           
           
 
