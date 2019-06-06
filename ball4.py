@@ -13,7 +13,6 @@ I have decided to combine movement paddle.
 
 """
 
-
 from microbit import *
 import music
 import random
@@ -24,7 +23,6 @@ class Ball:
         self.y = y
         self.xspeed = xspeed
         self.yspeed = yspeed
-
         self.bottomPaddle = 1
         self.topPaddle = 1
         self.yspeed = (random.choice([-1, 1]))
@@ -36,7 +34,7 @@ class Ball:
 
     def __setPaddleBottom(self):
         display.set_pixel(self.bottomPaddle, 4, 5)
-        display.set_pixel(self.topPaddle - 1, 4, 5)
+        display.set_pixel(self.bottomPaddle - 1, 4, 5)
 
     def __getCurrentBallPosition(self):
         return self.x, self.y
@@ -66,6 +64,7 @@ class Ball:
                 self.topPaddle = self.topPaddle + 1
               
     def render(self):
+      self.__getCurrentBallPosition()
       display.set_pixel(self.x, self.y, 9)
       sleep(500)
       display.set_pixel(self.x, self.y, 0)
@@ -79,11 +78,11 @@ class Ball:
         elif self.y == 1 or self.y == 3:
             if self.y == 1:
                 if self.topPaddle == self.x:
-                    self.xspeed = -1
-                    self.yspeed = -1
+                    self.xspeed = 1
+                    self.yspeed = 1
                 elif self.topPaddle - 1 == self.x:
                     self.xspeed = -1
-                    self.yspeed = -1
+                    self.yspeed = 1
             else:
                 if self.bottomPaddle == self.x:
                     self.xspeed = 1
@@ -93,6 +92,7 @@ class Ball:
                     self.yspeed = -1
             self.x += self.xspeed
             self.y += self.yspeed
+            
         else:
             self.x += self.xspeed
             self.y += self.yspeed
@@ -109,24 +109,26 @@ class Ball:
           
           
 ball = Ball()
+
 def function():
-     global edges
      ball.setPaddle()
      ball.AI()
      edges = ball.update()
 
 
 ball.show()
+sleep(500)
 while True:
      function()
      ball.show()
-     if edges == 1:
-         display.show(Image.HAPPY)
-     elif edges == 2:
-         display.show(Image.SAD)
+     if ball.update() != 0:
+        break
+        sleep(500)
+if ball.update() == 1:
+    display.show(Image.HAPPY)
+elif ball.update() == 2:
+    display.show(Image.SAD)
 
-while True:
-     ball.render()
 
         
         
