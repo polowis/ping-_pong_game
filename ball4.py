@@ -18,6 +18,9 @@ I have decided to combine movement paddle. Please use the class Ball code when s
 from microbit import *
 import music
 import random
+import radio
+
+radio.on()
 
 
 class Ball:
@@ -43,13 +46,25 @@ class Ball:
         return self.x, self.y
 
     def setPaddle(self):
+        message = radio.receive()
+        if message == "right":
+            self.bottomPaddle += 1
+        elif message == "left":
+            self.bottomPaddle -= 1
+        if self.bottomPaddle < 1:
+            self.bottomPaddle = 1
+        elif self.bottomPadde > 4:
+            self.bottomPaddle = 4
+        return
+    """
         self.bottomPaddle += button_b.get_presses()
-        self.bottomPaddle -= button_b.get_presses()
+        self.bottomPaddle -= button_a.get_presses()
         if self.bottomPaddle < 1:
             self.bottomPaddle = 1
         elif self.bottomPaddle > 4:
             self.bottomPaddle = 4
         return
+    """
 
     def show(self):
         display.clear()
