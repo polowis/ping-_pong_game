@@ -27,7 +27,7 @@ class Ball:
         self.xspeed = xspeed
         self.yspeed = yspeed
         self.bottomPaddle = 1
-        self.topPaddle = 
+        self.topPaddle = 1
         
     #set the top paddle at specific position.
     #paddle has 2 pixels, displaying on the top of the x-axis. 
