@@ -1,3 +1,9 @@
+"""
+@contributors: 
+
+"""
+
+#import all necessary modules
 from microbit import *
 import music
 import random
@@ -35,12 +41,14 @@ class Ball:
         display.set_pixel(self.bottomPaddle, 4, 5)
         display.set_pixel((self.bottomPaddle - 1), 4, 5)
     
-    #return the x and y value of the ball
+    #return the x and y value of the ball, 
+    #private method, we don't want this to be called outside of the class.
     def __getCurrentBallPosition(self):
         return self.x, self.y
     
     #check condition of the paddle, if bottom paddle position less than 1, assign 1 to its value
     #prevents index out of bounds
+    #private method
     def __getSetPaddle(self):
         if self.bottomPaddle < 1:
             self.bottomPaddle = 1
@@ -51,7 +59,8 @@ class Ball:
     def setPaddle(self, message): #(SetPaddle) reads the message that is sent from the movement microbit and is used to move the paddle either left or right.
         if message == "right":
             self.bottomPaddle += 1
-            #move the paddle by one according to the message
+            #move the bottom paddle by one according to the message
+            #the top paddle is controlled by the AI
         elif message == "left":
             self.bottomPaddle -= 1
         self.__getSetPaddle()
@@ -65,7 +74,7 @@ class Ball:
         display.set_pixel(self.x, self.y, 9)
         sleep(500)
         
-
+    #control AI movement 
     def AI(self): #The AI is displayed on the top of the microbit display and reacts to the movement of the ball and this is what the player is playing against.
         if (random.randint(1, 6)) != 1:
             #move the top padding according to the ball position
@@ -83,34 +92,38 @@ class Ball:
       display.set_pixel(self.x, self.y, 0)
       sleep(1000)
     
-    #up    
+    #the ball movement
     def update(self):
-        if self.y == 2:
+        if self.y == 2: #start from the center of the microbit and move randomly
             self.x = self.x + self.yspeed
             self.y = self.y + self.yspeed
-        elif self.y == 1 or self.y == 3:
-            if self.y == 1:
-                if self.topPaddle == self.x:
-                    self.xspeed = 1
+        elif self.y == 1 or self.y == 3: #check if the ball hit at point 1 or 3, 
+            if self.y == 1: #if it does
+                if self.topPaddle == self.x: #get the paddle position, if it hits the paddle
+                    self.xspeed = 1 #increase xspeed and yspeed by 1
                     self.yspeed = 1
-                elif self.topPaddle - 1 == self.x:
-                    self.xspeed = -1
+                elif self.topPaddle - 1 == self.x: #the paddle has two pixel, check if it hits the other pixel
+                    self.xspeed = -1 #set xspeed to -1 and yspeed to 1, this create the different angle for the ball to be bound
                     self.yspeed = 1
-            else:
+            else: #check the bottom paddle, see if the ball hits the paddle
                 if self.bottomPaddle == self.x:
                     self.xspeed = 1
                     self.yspeed = -1
                 elif self.bottomPaddle - 1 == self.x:
                     self.xspeed = -1
                     self.yspeed = -1
+            #return the result
             self.x += self.xspeed
-            self.y += self.yspeed
+            self.y += self.yspeed 
             
-        else:
+        else: #check if the ball doesnt hit the paddle
             self.x += self.xspeed
             self.y += self.yspeed
-        if self.x <= 0 or self.x >= 4:
+        if self.x <= 0 or self.x >= 4: #check the side of the microbit
             self.xspeed = self.xspeed * -1
+        #check the top and bottom paddle, if it doesnt hit the paddle, if it hits the paddle, it will bounce back
+        #if it doesnt, the y position keeps increasing. 
+        #return the result
         if self.y <= 0:
             return 1
         elif self.y >= 4:
@@ -120,39 +133,33 @@ class Ball:
 
 
           
-          
+#call the class
+#parameters are optional, default is x = 2, y = 2, xspeed and yspeed are at random
 ball = Ball()
 
+#create a function
 def function():
-     message = radio.receive()
-     ball.setPaddle(message)
-     ball.AI()
-     edges = ball.update()
+     message = radio.receive() #receive the data from the radio
+     ball.setPaddle(message) # pass the data to setPaddle function, with message as the parameter
+     ball.AI() #activate AI
+     edges = ball.update() #check the edges, see if it hits
 
 
-ball.show()
-sleep(500)
+ball.show() #display the ball at the start, default is x = 2, y = 2 which is in the middle
+sleep(500) 
 while True: #Main Loop
-     function()
-     ball.show()
+     function() #call the function
+     ball.show() #display the ball after update the position
      if ball.update() != 0:
         break
         sleep(500)
+#check if function update return a number, determine where the ball hits
 if ball.update() == 1:
+    #if the player wins, display image
     display.show(Image.HAPPY)
+#if the AI wins, display image
 elif ball.update() == 2:
     display.show(Image.SAD)
 
 
-ball.show()
-sleep(500)
-while True:
-     function()
-     ball.show()
-     if ball.update() != 0:
-        break
-        sleep(500)
-if ball.update() == 1:
-    display.show(Image.HAPPY)
-elif ball.update() == 2:
-    display.show(Image.SAD)
+
