@@ -1,5 +1,7 @@
 """
-@contributors: 
+@name : 
+@contributors: Hung, Kez, Toby
+@description: Pong game using microbit
 
 """
 
@@ -19,7 +21,7 @@ class Ball:
     #the x and y coordinates gives position of the ball. 
     #xspeed and yspeed are random values which determine the movement of the ball.
     #here, self is the instance of the class
-    def __init__(self, x = 2, y = 2, xspeed = (random.choice([-1, 1])), yspeed = (random.choice([-1, 1]))): 
+    def __init__(self, x = 2, y = 2, xspeed = (random.choice([-1, 1])), yspeed = (random.choice([-1, 1]))): #random.choice, get random element from the list, either 1 or -1
         self.x = x
         self.y = y
         self.xspeed = xspeed
