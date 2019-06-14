@@ -81,6 +81,8 @@ class Ball:
     def AI(self): #The AI is displayed on the top of the microbit display and reacts to the movement of the ball and this is what the player is playing against.
         if (random.randint(1, 6)) != 1:
             #move the top padding according to the ball position
+            #here it gets the position of ball and the position of the top paddle 
+            #if the x of the ball position less than the x position of the paddle, move the paddle to the left, else move them to right
             if self.x < self.topPaddle - 1:
                 self.topPaddle = self.topPaddle -1
             elif self.x > self.topPaddle:
