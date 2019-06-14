@@ -73,6 +73,7 @@ class Ball:
         display.clear()
         self.__setPaddleTop()
         self.__setPaddleBottom()
+        #display the ball position
         display.set_pixel(self.x, self.y, 9)
         sleep(500)
         
