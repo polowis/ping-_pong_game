@@ -44,17 +44,20 @@ class Ball:
 
     def __getCurrentBallPosition(self):
         return self.x, self.y
+    def __getSetPaddle(self):
+        if self.bottomPaddle < 1:
+            self.bottomPaddle = 1
+        elif self.bottomPaddle > 4:
+            self.bottomPaddle = 4
+           
+            
 
-    def setPaddle(self):
-        message = radio.receive()
+    def setPaddle(self, message):
         if message == "right":
             self.bottomPaddle += 1
         elif message == "left":
             self.bottomPaddle -= 1
-        if self.bottomPaddle < 1:
-            self.bottomPaddle = 1
-        elif self.bottomPadde > 4:
-            self.bottomPaddle = 4
+        self.__getSetPaddle()
         return
     """
         self.bottomPaddle += button_b.get_presses()
@@ -129,7 +132,8 @@ class Ball:
 ball = Ball()
 
 def function():
-     ball.setPaddle()
+     message = radion.receive()
+     ball.setPaddle(message)
      ball.AI()
      edges = ball.update()
 
