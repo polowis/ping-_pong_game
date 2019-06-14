@@ -4,10 +4,10 @@ import random
 import radio
 
 radio.on()
-radio.config(channel = 23)
+radio.config(channel = 23) #The channel makes sure that the code is received without being lost and mixed up with other radio signals.
 
 class Ball:
-    def __init__(self, x = 2, y = 2, xspeed = (random.choice([-1, 1])), yspeed = (random.choice([-1, 1]))):
+    def __init__(self, x = 2, y = 2, xspeed = (random.choice([-1, 1])), yspeed = (random.choice([-1, 1]))): 
         self.x = x
         self.y = y
         self.xspeed = xspeed
@@ -27,14 +27,14 @@ class Ball:
 
     def __getCurrentBallPosition(self):
         return self.x, self.y
-
+    
     def __getSetPaddle(self):
         if self.bottomPaddle < 1:
             self.bottomPaddle = 1
         elif self.bottomPaddle > 4:
             self.bottomPaddle = 4
 
-    def setPaddle(self, message):
+    def setPaddle(self, message): #(SetPaddle) reads the message that is sent from the movement microbit and is used to move the paddle either left or right.
         if message == "right":
             self.bottomPaddle += 1
         elif message == "left":
@@ -47,24 +47,24 @@ class Ball:
         self.__setPaddleTop()
         self.__setPaddleBottom()
         display.set_pixel(self.x, self.y, 9)
-        sleep(300)
+        sleep(500)
+        
 
-
-    def AI(self):
+    def AI(self): #The AI is displayed on the top of the microbit display and reacts to the movement of the ball and this is what the player is playing against.
         if (random.randint(1, 6)) != 1:
             if self.x < self.topPaddle - 1:
                 self.topPaddle = self.topPaddle -1
             elif self.x > self.topPaddle:
                 self.topPaddle = self.topPaddle + 1
-
+              
     def render(self):
       self.__getCurrentBallPosition()
       display.set_pixel(self.x, self.y, 9)
       sleep(1000)
       display.set_pixel(self.x, self.y, 0)
       sleep(1000)
-
-
+    
+        
     def update(self):
         if self.y == 2:
             self.x = self.x + self.yspeed
@@ -86,7 +86,7 @@ class Ball:
                     self.yspeed = -1
             self.x += self.xspeed
             self.y += self.yspeed
-
+            
         else:
             self.x += self.xspeed
             self.y += self.yspeed
@@ -100,8 +100,8 @@ class Ball:
             return 0
 
 
-
-
+          
+          
 ball = Ball()
 
 def function():
@@ -109,6 +109,20 @@ def function():
      ball.setPaddle(message)
      ball.AI()
      edges = ball.update()
+
+
+ball.show()
+sleep(500)
+while True: #Main Loop
+     function()
+     ball.show()
+     if ball.update() != 0:
+        break
+        sleep(500)
+if ball.update() == 1:
+    display.show(Image.HAPPY)
+elif ball.update() == 2:
+    display.show(Image.SAD)
 
 
 ball.show()
