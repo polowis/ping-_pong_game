@@ -44,13 +44,13 @@ class Ball:
 
     def __getCurrentBallPosition(self):
         return self.x, self.y
+    
     def __getSetPaddle(self):
         if self.bottomPaddle < 1:
             self.bottomPaddle = 1
         elif self.bottomPaddle > 4:
             self.bottomPaddle = 4
-           
-            
+
 
     def setPaddle(self, message):
         if message == "right":
