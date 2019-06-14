@@ -15,7 +15,7 @@ radio.on()
 radio.config(channel = 23) #The channel makes sure that the code is received without being lost and mixed up with other radio signals.
 
 #group all the functions in a class, easier to maintain and structure the code. 
-#camel style for naming convetion :). 
+#camel style for naming convention :). 
 class Ball:
     #create a constructor, takes 4 parameters
     #the x and y coordinates gives position of the ball. 
