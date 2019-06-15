@@ -1,5 +1,5 @@
 """
-@name : 
+@name : Badda BING Badda PONG
 @contributors: Hung, Kez, Toby
 @description: Pong game using microbit
 
